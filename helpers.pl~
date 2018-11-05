@@ -1,0 +1,25 @@
+:- module( helpers,
+	 [ readMagicSquareInfoFile/4
+	 , printGame/1
+	 ]
+    ).
+
+readMagicSquareInfoFile(File,Spaces,Values,Game):-
+    open(File,read,Input),
+    read(Input,Spaces),
+    read(Input,Values),
+    readGame(Input,Game),
+    close(Input).
+
+readGame(Input,[]):-
+    at_end_of_stream(Input),
+    !.
+readGame(Input,[Row|Rows]):-
+    \+ at_end_of_stream(Input),
+    read(Input,Row),
+    readGame(Input,Rows).
+
+printGame([]).
+printGame([Row|Rows]):-
+    writeln(Row),
+    printGame(Rows).

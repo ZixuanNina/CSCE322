@@ -1,0 +1,6 @@
+percentageSpaces(Game):-
+    length(Game, len),
+    sum is len*len,
+    totalS is sum/4,
+    length(findall(0,Game,L), spaces),
+    spaces >= totalS.
